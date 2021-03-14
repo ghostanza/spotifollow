@@ -5,12 +5,12 @@ const app = express();
 const routes = require('./routes/main.js')
 const port = process.env.PORT || 8080;
 
-app.use(express.static(path.join(__dirname, '../../build')));
+// app.use(express.static(path.join(__dirname, '../../build')));
 
 app.use(routes);
 
 app.get('/ping', function (req, res) {
- return res.send('pong');
+ res.send({message: 'pong'});
 });
 
 app.use((req, res, next) => {
