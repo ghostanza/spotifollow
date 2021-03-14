@@ -3,7 +3,8 @@ var express = require('express'),
     url = require('url'),
     path = require('path'),
     fs = require('fs'),
-    request = require('request');
+    request = require('request'),
+    auth_handler = require('../modules/auth_handler');
 
 // API routes
 router.get('/s/:endpoint', (req,res,next) => {
@@ -11,14 +12,16 @@ router.get('/s/:endpoint', (req,res,next) => {
   switch(endpoint){
     case 'callback':
       var code = req.query.code;
-      res.send(`TESTING CALLBACK, CODE: ${code}`);
+      let thing = auth_handler.test(code);
+      res.send(thing);
+      //auth_handler.tokenRequest(code, 'initial', res, req);
       break;
     case 'code':
       res.send("FETCHING THE CODE...")
       break;
     case 'token':
       var refresh = req.query.refresh;
-      res.send(`TESTING TOKEN, REFRESH: ${refresh}`);
+      auth_handler.tokenRequest(refresh, 'refresh', res, req);
       break;
     default:
       //logger.log_404(req);
