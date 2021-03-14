@@ -12,8 +12,7 @@ router.get('/s/:endpoint', (req,res,next) => {
   switch(endpoint){
     case 'callback':
       var code = req.query.code;
-      let thing = auth_handler.test(code);
-      res.send(thing);
+      auth_handler.tokenRequest(code, 'initial', res, req);
       //auth_handler.tokenRequest(code, 'initial', res, req);
       break;
     case 'code':

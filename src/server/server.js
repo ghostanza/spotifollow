@@ -1,9 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
 const routes = require('./routes/main.js')
-const port = process.env.PORT || 8080;
+const port = 8080;
 
 // app.use(express.static(path.join(__dirname, '../../build')));
 
